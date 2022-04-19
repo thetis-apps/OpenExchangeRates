@@ -136,21 +136,21 @@ exports.shipmentCreatedHandler = async (event, x) => {
     if (detail.eventType == 'shipmentCreated') {
     	response = await ims.get('shipments/' + detail.shipmentId);
     	let shipment = response.data;
-    	if (context.baseCurrencyCode != shipment.currencyCode) {
+    	if (shipment.currencyCode != 'UNDEFINED' && context.baseCurrencyCode != shipment.currencyCode) {
 	    	let exchangeRate = await getExchangeRate(oer, appId, context.baseCurrencyCode, shipment.currencyCode);
 	    	response = await ims.patch('shipments/' + detail.shipmentId, { currencyExchangeRate: exchangeRate });
     	}
     } else if (detail.eventType == 'inboundShipmentCreated') {
     	response = await ims.get('inboundShipments/' + detail.inboundShipmentId);
     	let shipment = response.data;
-    	if (context.baseCurrencyCode != shipment.currencyCode) {
+    	if (shipment.currencyCode != 'UNDEFINED' && context.baseCurrencyCode != shipment.currencyCode) {
 	    	let exchangeRate = await getExchangeRate(oer, appId, context.baseCurrencyCode, shipment.currencyCode);
 	    	response = await ims.patch('inboundShipments/' + detail.inboundShipmentId, { currencyExchangeRate: exchangeRate });
     	}
     } else if (detail.eventType == 'returnShipmentCreated') {
     	response = await ims.get('returnShipments/' + detail.returnShipmentId);
     	let shipment = response.data;
-    	if (context.baseCurrencyCode != shipment.currencyCode) {
+    	if (shipment.currencyCode != 'UNDEFINED' && context.baseCurrencyCode != shipment.currencyCode) {
 	    	let exchangeRate = await getExchangeRate(oer, appId, context.baseCurrencyCode, shipment.currencyCode);
 	    	response = await ims.patch('returnShipments/' + detail.returnShipmentId, { currencyExchangeRate: exchangeRate });
     	}

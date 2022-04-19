@@ -1,30 +1,27 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  OpenExchangeRates
+Description: 'OpenExchangeRates
 
   Sample SAM Template for OpenExchangeRates
-  
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+
+  '
 Globals:
   Function:
     Timeout: 3
-
-# Metadata to use for the publishing to the SAR
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: thetis-ims-open-exchange-rates
-    Description: Application for integrating Thetis IMS with the open exchange rates service.
+    Description: Application for integrating Thetis IMS with the open exchange rates
+      service.
     Author: thetis-apps
     SpdxLicenseId: Apache-2.0
-    LicenseUrl: LICENSE.txt
-    ReadmeUrl: README.md
-    Labels: ['thetis-ims']
+    LicenseUrl: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/4612b8d5aa75b9b9936c9b7b9e6c7e82
+    ReadmeUrl: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/7e2c69033f807a057b1450c0f9bacf6b
+    Labels:
+    - thetis-ims
     HomePageUrl: https://github.com/thetis-apps/OpenExchangeRates
-    SemanticVersion: 0.1.1
+    SemanticVersion: '0.1.0'
     SourceCodeUrl: https://github.com/thetis-apps/OpenExchangeRates
-
-# Parameters of the application 
 Parameters:
   ContextId:
     Type: String
@@ -39,12 +36,11 @@ Parameters:
   ApiKey:
     Type: String
   DevOpsEmail:
-    Description: The email address to send mail to when messages in the dead letter queue.
+    Description: The email address to send mail to when messages in the dead letter
+      queue.
     Type: String
     MinLength: 4
-    
 Resources:
-
   ShipmentCreatedHandler:
     Type: AWS::Serverless::Function
     Properties:
@@ -81,8 +77,7 @@ Resources:
           Fn::GetAtt:
           - DeadLetterQueue
           - Arn
-
-  # Initialisation of Open Exchange Rate integration in context        
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/3ca01432ff8ba06364c1723bd66cb433
   InitResource:
     Type: AWS::CloudFormation::CustomResource
     Properties:
@@ -109,8 +104,7 @@ Resources:
             Ref: ApiKey
           ContextId:
             Ref: ContextId
-
-  # Our standard monitoring setup      
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/3ca01432ff8ba06364c1723bd66cb433
   DeadLetterQueue:
     Type: AWS::SQS::Queue
     Properties: {}
@@ -139,7 +133,7 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-      - Endpoint: 
-          Ref: DevOpsEmail        
+      - Endpoint:
+          Ref: DevOpsEmail
         Protocol: email
       DisplayName: Incidents to be handled by Thetis Devops.
