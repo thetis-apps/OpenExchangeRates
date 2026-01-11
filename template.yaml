@@ -7,7 +7,7 @@ Description: >
 Globals:
   Function:
     Timeout: 30
-    Runtime: nodejs16.x
+    Runtime: nodejs24.x
 
 # Metadata to use for the publishing to the SAR
 Metadata:
@@ -20,7 +20,7 @@ Metadata:
     ReadmeUrl: README.md
     Labels: ['thetis-ims']
     HomePageUrl: https://github.com/thetis-apps/OpenExchangeRates
-    SemanticVersion: 2.0.0
+    SemanticVersion: 2.0.1
     SourceCodeUrl: https://github.com/thetis-apps/OpenExchangeRates
 
 # Parameters of the application 
