@@ -19,7 +19,7 @@ Metadata:
     Labels:
     - thetis-ims
     HomePageUrl: https://github.com/thetis-apps/OpenExchangeRates
-    SemanticVersion: 2.0.0
+    SemanticVersion: 2.1.0
     SourceCodeUrl: https://github.com/thetis-apps/OpenExchangeRates
 Parameters:
   ContextId:
@@ -60,7 +60,7 @@ Resources:
           Type: Schedule
           Properties:
             Schedule: cron(0 12 * * ? *)
-      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/9b24b0d668994a720d8fb0fdb60d1c04
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/51accac5b46cfdd029d91c10ee7cd389
     Metadata:
       SamResourceId: UpdateRates
   InitResource:
@@ -90,7 +90,7 @@ Resources:
             Ref: ApiKey
           ContextId:
             Ref: ContextId
-      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/9b24b0d668994a720d8fb0fdb60d1c04
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1q52gionhjeg3/51accac5b46cfdd029d91c10ee7cd389
     Metadata:
       SamResourceId: InitializeFunction
   DeadLetterQueue:
